@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Informe</title>
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://kit.fontawesome.com/225ba68665.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="contenedor">
+            <div id="info">
+                <div id="tituloPagina">PLANILLA DE INFORME</div>
+                <div class="box">
+                    <label for="tipoInforme">Tipo de Informe</label>
+                    <select name="tipoInforme" id="tipoInforme">
+                        <option value="0"></option>
+                        <option value="1">Inventario</option>
+                        <option value="2">Devolucion</option>
+                        <option value="3">Productos con Defectos</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="semana">Semana</label>
+                    <select name="semana" id="semana">
+                        <option value="0"></option>
+                        <option value="1">04/2022</option>
+                        <option value="2">05/2022</option>
+                        <option value="3">06/2022</option>
+                        <option value="4">07/2022</option>
+                        <option value="5">08/2022</option>
+                        <option value="6">09/2022</option>
+                        <option value="7">10/2022</option>
+                    </select> 
+                </div>
+                <div class="box">
+                    <label for="distribuidor">Distribuidor</label>
+                    <select name="distribuidor" id="distribuidor">
+                        <option value="0"></option>
+                        <option value="13"></option>
+                        <option value="14">Stock</option>
+                    </select>    
+                </div>           
+            </div>
+            <div id="item">                
+                <div class="box">
+                    <label for="codigo">Item Codigo</label>
+                    <input type="number" name="codigo" id="codigo" disabled>
+                    <button id="botonBuscar"><i class="fas fa-search"></i></button> 
+                </div>
+                <div class="box">
+                    <label for="nombre">Item Nombre</label>
+                    <input type="text" name="nombre" id="nombre" disabled> 
+                </div>                               
+                <div class="box">
+                    <label for="cantidad">Item Cantidad</label>
+                    <input type="number" name="cantidad" id="cantidad" disabled>
+                </div>  
+                <div class="box" id="boxObservacion">
+                    <label for="observacion">Observacion</label>
+                    <input type="text" name="observacion" id="observacion" disabled> 
+                </div>                            
+                <div class="opciones">
+                    <button class="boton" id="botonLimpiar">Borrar Todo</button>
+                    <button class="boton" id="botonCrear">Crear PDF</button>
+                    <button class="boton" id="botonAgregar">Agregar</button>
+                </div>
+            </div>
+            <div id="pdf">
+                <div id="tituloInforme">Informe de</div>
+                <div id="tituloSemana">Semana N°</div>
+                <div id="tituloDistribuidor">Distribuidor:</div>
+                <div id="tablas">
+                    <table id="tabla">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Item</th>
+                                <th>Cantidad</th>
+                                <th class="col-4">-</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>                
+                <div id="total">Total Items: 0</div>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modalContenido">
+                <div id="tituloConsulta">Buscar item por nombre</div>
+                <div id="boxConsulta">
+                    <input type="text" name="consulta" id="consulta">
+                    <button id="botonConsulta">Buscar</button>
+                </div>                
+                <table id="tablaConsulta">
+                    <thead>
+                        <tr>
+                            <th>CODIGO</th>
+                            <th>NOMBRE</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyConsulta">
+                    </tbody>
+                </table>
+                <button class="boton" id="botonCerrar">Cerrar</button>
+            </div>
+        </div>       
+        <script src="pdf.js"></script>  
+        <script src="items.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
