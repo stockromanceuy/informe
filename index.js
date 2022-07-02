@@ -1,8 +1,8 @@
 // INFO
-const boxError = document.querySelector('#box-error');
+const error = document.querySelector('#error');
 const tipoInforme = document.querySelector('#tipo-informe');
-const semana = document.querySelector('#semana');
 const distribuidor = document.querySelector('#distribuidor');
+const semana = document.querySelector('#semana');
 // ESTADO ITEM
 const estadoBueno = document.querySelector('#estado-bueno');
 const estadoDefecto = document.querySelector('#estado-defecto');
@@ -19,14 +19,16 @@ const botonCrear = document.querySelector('#boton-crear');
 const botonAgregar = document.querySelector('#boton-agregar'); 
 // PDF
 const pdf = document.querySelector('#pdf');
+const encabezadoPdf = document.querySelector('#encabezado-pdf');
 const tituloInforme = document.querySelector('#titulo-informe');
-const tituloSemana = document.querySelector('#titulo-semana');
 const tituloDistribuidor = document.querySelector('#titulo-distribuidor');
+const tituloSemana = document.querySelector('#titulo-semana');
+const tituloCreado = document.querySelector('#titulo-creado'); 
 // TABLA
 const tabla = document.querySelector('table');
 const tbodyTabla = document.querySelector('#tbody-tabla');
 const botonEliminar = document.querySelectorAll(".boton-eliminar");
-const total = document.querySelector('#total');
+const tituloTotal = document.querySelector('#titulo-total');
 // MODAL
 const modal = document.querySelector('#modal');
 const consulta = document.querySelector('#consulta');
@@ -397,7 +399,7 @@ function sumarItems()
     {
         suma = parseInt(num.innerHTML) + suma;            
     });
-    total.innerHTML = 'Total Items: '+suma;
+    tituloTotal.innerHTML = 'TOTAL&nbsp;ITEM:&nbsp;'+suma;
 }
 //LIMPIAR
 function limpiarDatos()
@@ -556,20 +558,24 @@ botonCrear.addEventListener('click', function()
 });
 function crearPDF()
 {
+    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
+    var textoSemana = semana.options[semana.selectedIndex].text;
+    var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
+
+    tituloInforme.innerHTML = 'informe&nbsp;de&nbsp;'+textoTipoInforme;                       
+    tituloDistribuidor.innerHTML = 'distribuidor:&nbsp;'+textoDistribuidor;            
+    tituloSemana.innerHTML = 'semana&nbsp;n°&nbsp;'+textoSemana;
+
+    var fecha = new Date();
+
+    tituloCreado.innerHTML = 'creado:&nbsp;'+fecha.toLocaleDateString()+'&nbsp;'+fecha.toLocaleTimeString();  
+
     var filas = tbodyTabla.rows.length;
     
     if(filas > 0)
     {
         if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 99)
-        {
-            var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
-            var textoSemana = semana.options[semana.selectedIndex].text;
-            var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
-
-            tituloInforme.innerHTML = 'Informe de '+textoTipoInforme;            
-            tituloSemana.innerHTML = 'Semana N° '+textoSemana;            
-            tituloDistribuidor.innerHTML = 'Distribuidor: '+textoDistribuidor; 
-            
+        {   
             var element = pdf;            
             var nombrePDF = textoTipoInforme.substring(0,3).toUpperCase()+'-'+textoSemana+'-'+textoDistribuidor.toUpperCase();
                     
@@ -616,18 +622,18 @@ function crearPDF()
         codigo.focus();
     }  
 }
-function ocultarColumna(displayCol, displayTitulo)
+function ocultarColumna(displayColumna, displayEncabezado)
 {
+    //implementar ocultar col-5
+    
     var all = document.getElementsByClassName('col-4');
     
     for (var i = 0; i < all.length; i++) 
     {
-        all[i].style.display = displayCol;
+        all[i].style.display = displayColumna;
     }
 
-    tituloInforme.style.display = displayTitulo;
-    tituloSemana.style.display = displayTitulo;
-    tituloDistribuidor.style.display = displayTitulo;
+    encabezadoPdf.style.display = displayEncabezado;
 }
 //*******************************
 function semanaActual()
